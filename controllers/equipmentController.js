@@ -1,6 +1,4 @@
-const fetch = require('node-fetch');
-
-const BASE_URL = 'http://localhost:3000/api/equipment';
+const BASE_URL = 'http://localhost:3000/equipment';
 
 const getAllEquipment = async  (req, res) => {
     try {

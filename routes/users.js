@@ -12,4 +12,7 @@ router.route('/:id')
     .put(userController.updateUser)
     .delete(userController.deleteUser);
 
+router.route('/byName')
+    .get(userController.filterByName);
+
 module.exports = router;
