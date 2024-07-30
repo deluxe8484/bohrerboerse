@@ -8,8 +8,8 @@ const getAllUsers = async (req, res) => {
         }
         const usersList = await response.json();
         
-        // Equipment-Listenansicht mit dynamischen Daten rendern
-        res.render('users', { equipment: usersList });
+        // User-Listenansicht mit dynamischen Daten rendern
+        res.render('users', { users: usersList });
     } catch (error) {
         console.error('Fehler beim Abrufen der Nutzer:', error.message);
         res.status(500).send('Fehler beim Abrufen der Nutzer.');

@@ -4,29 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users</title>
-    <link  rel="stylesheet" TYPE="text/css" href="/public/stylesheets/bootstrap.min.css">
+    <link  rel="stylesheet" TYPE="text/css" href="/stylesheets/bootstrap.min.css">
 </head>
 <body>
-    <% include('../partials/_navbar.ejs'); %>
+    <%- include('../partials/_navbar'); %>
 
-    <% include('../partials/_searchbar.ejs'); %>
+    <%- include('../partials/_searchbar'); %>
 
     <div class="container">
         <div class="row">
-            <div class="col-lg">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+            <% users.forEach(user => { %>
+                <div class="col-lg">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= user.username %></h5>
+                            <p class="card-text"><%= user.email %></p>
+                            <a href="#" class="btn btn-primary">Ansehen</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            <% }); %>
     </div>
 
-    <% include('../partials/_footer.ejs'); %>
+    <%- include('../partials/_footer'); %>
 
-    <script src="/public/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
 </body>
 </html>
