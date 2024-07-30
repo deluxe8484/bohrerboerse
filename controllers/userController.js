@@ -48,7 +48,7 @@ const getUser = async (req, res) => {
         }
         const user = await response.json();
         
-        // Einzelansicht für das Equipment rendern
+        // Einzelansicht für einen User rendern
         res.render('userDetail', { user : user });
     } catch (error) {
         console.error('Fehler beim Abrufen des Users:', error.message);
@@ -102,7 +102,24 @@ const deleteUser = async (req, res) => {
 }
 
 const filterByName = async (req, res) => {
-    // todo
+    const nameQuery = req.query.username;
+
+    if (!nameQuery) {
+        return res.status(400).json({ error: 'Query parameter "username" is required' });
+    }
+
+    try {
+        const response = await fetch(BASE_URL);
+        const users = await response.json();
+
+        // Filtern der Userdaten nach dem Query-Parameter "username"
+        const filteredUsers = users.filter(user => user.username.toLowerCase().includes(nameQuery.toLowerCase()));
+
+        res.json(filteredUsers);
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).json({ error: 'An error occurred while fetching user data' });
+    }
 }
 
 module.exports = {

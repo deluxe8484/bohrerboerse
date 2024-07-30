@@ -25,7 +25,6 @@ app.use(express.static('public'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/tools', equipmentRouter);
 app.use('/borrows', borrowRouter);
 app.use('/equipment', equipmentRouter);
 
