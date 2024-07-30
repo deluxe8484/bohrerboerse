@@ -17,7 +17,7 @@ const getAllUsers = async (req, res) => {
 }
 
 const addUser = async (req, res) => {
-    const { name, type, available } = req.body; // Daten aus dem Anfragekörper abrufen
+    const { username, password, email, role, matrikelnr, birthday } = req.body; // Daten aus dem Anfragekörper abrufen
     try {
         const response = await fetch(BASE_URL, {
             method: 'POST',
