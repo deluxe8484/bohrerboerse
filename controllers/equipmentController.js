@@ -17,7 +17,7 @@ const getAllEquipment = async  (req, res) => {
 };
 
 const addEquipment = async (req, res) => {
-    const { name, type, available } = req.body; // Daten aus dem Anfragekörper abrufen
+    const { articlenumber, title, description, count, userid } = req.body; // Daten aus dem Anfragekörper abrufen
     try {
         const response = await fetch(BASE_URL, {
             method: 'POST',
