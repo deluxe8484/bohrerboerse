@@ -14,7 +14,6 @@
     <div class="container">
         <div class="row">
             <% borrows.forEach(borrow => { 
-                // Convert borrow.end to a Date object and compare with current date
                 // Datum nach Ablauf prüfen und farbe ändern
                 const endDate = new Date(borrow.end);
                 const currentDate = new Date();
@@ -24,7 +23,6 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title">Benutzer: <%= borrow.userid %></h5>
-                            <p>Startdatum: <span class="card-date"><%= borrow.start %></span></p>
                             <p>Startdatum: 
                                 <span class="card-date"><%= borrow.start %></span></p>
                             <p>Enddatum: 
@@ -64,5 +62,4 @@
         }
     </script>
 </body>
-</html>
 </html>
