@@ -10,7 +10,7 @@ const getAllBorrows = async (req, res) => {
         const borrowList = await response.json();
         
         // Ansicht für ausgeliehene Gegenstände
-        res.render('borrowedItems', { borrowedItems: borrowList });
+        res.render('borrows', { borrows: borrowList });
     } catch (error) {
         console.error('Fehler beim Laden der Ausleihen:', error.message);
         res.status(500).send('Fehler beim Laden der Ausleihen.');
@@ -19,14 +19,14 @@ const getAllBorrows = async (req, res) => {
 
 // Hinzufügen einer neuen Ausleihe
 const addBorrow = async (req, res) => {
-    const { userId, equipmentId, borrowDate, returnDate } = req.body; // Abrufen der Daten aus dem Anfragekörper
+    const { userid, equipmentids, start, end } = req.body; // Abrufen der Daten aus dem Anfragekörper
     try {
         const response = await fetch(BASE_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId, equipmentId, borrowDate, returnDate }),
+            body: JSON.stringify({ userid, equipmentids, start, end }),
         });
 
         if (!response.ok) {
@@ -52,7 +52,7 @@ const getBorrow = async (req, res) => {
         const borrowItem = await response.json();
         
         // Detailansicht für eine spezifische Ausleihe
-        res.render('borrowedItemDetail', { borrowedItem: borrowItem });
+        res.render('borrowsDetail', { borrows: borrowItem });
     } catch (error) {
         console.error('Fehler beim Laden der Ausleihe:', error.message);
         res.status(404).send('Ausleihe nicht gefunden.');
@@ -62,7 +62,7 @@ const getBorrow = async (req, res) => {
 // Aktualisieren einer vorhandenen Ausleihe
 const updateBorrow = async (req, res) => {
     const { id } = req.params; // ID der zu aktualisierenden Ausleihe
-    const { userId, equipmentId, borrowDate, returnDate } = req.body; // Neue Daten aus dem Anfragekörper
+    const { userid, equipmentids, start, end } = req.body; // Neue Daten aus dem Anfragekörper
 
     try {
         const response = await fetch(`${BASE_URL}/${id}`, {
@@ -70,7 +70,7 @@ const updateBorrow = async (req, res) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId, equipmentId, borrowDate, returnDate }),
+            body: JSON.stringify({ userid, equipmentids, start, end }),
         });
 
         if (!response.ok) {
