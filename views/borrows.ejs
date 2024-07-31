@@ -15,6 +15,7 @@
         <div class="row">
             <% borrows.forEach(borrow => { 
                 // Convert borrow.end to a Date object and compare with current date
+                // Datum nach Ablauf prüfen und farbe ändern
                 const endDate = new Date(borrow.end);
                 const currentDate = new Date();
                 const isOverdue = endDate < currentDate;
@@ -24,12 +25,15 @@
                         <div class="card-body">
                             <h5 class="card-title">Benutzer: <%= borrow.userid %></h5>
                             <p>Startdatum: <span class="card-date"><%= borrow.start %></span></p>
+                            <p>Startdatum: 
+                                <span class="card-date"><%= borrow.start %></span></p>
                             <p>Enddatum: 
                                 <span class="card-date"style="<%= isOverdue ? 'color: red;' : '' %>">
                                     <%= borrow.end %>
                                 </span>
                             </p>
                             <a href="#" class="btn btn-danger">Rückgabe</a>
+                            <button class="btn btn-danger" onclick="returnBorrow('<%= borrow.id %>')">Rückgabe</button>
                         </div>
                     </div>
                 </div>
@@ -40,5 +44,25 @@
     <%- include('../partials/_footer'); %>
 
     <script src="/javascripts/bootstrap.min.js"></script>
+    <script>
+        function returnBorrow(id) {
+            console.log(`Rückgabe für Ausleihe mit ID: ${id}`); // Debugging-Log
+            fetch(`/borrows/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Fehler beim Entfernen der Ausleihe');
+                }
+                // Bei erfolgreicher Rückgabe die Seite neu laden
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Fehler beim Entfernen der Ausleihe:', error);
+                alert('Fehler beim Entfernen der Ausleihe.');
+            });
+        }
+    </script>
 </body>
+</html>
 </html>
