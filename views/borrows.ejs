@@ -2,9 +2,43 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrows</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
 </head>
 <body>
-    
+    <%- include('../partials/_navbar'); %>
+
+    <%- include('../partials/_searchbar'); %>
+
+    <div class="container">
+        <div class="row">
+            <% borrows.forEach(borrow => { 
+                // Convert borrow.end to a Date object and compare with current date
+                const endDate = new Date(borrow.end);
+                const currentDate = new Date();
+                const isOverdue = endDate < currentDate;
+            %>
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Benutzer: <%= borrow.userid %></h5>
+                            <p>Startdatum: <span class="card-date"><%= borrow.start %></span></p>
+                            <p>Enddatum: 
+                                <span class="card-date"style="<%= isOverdue ? 'color: red;' : '' %>">
+                                    <%= borrow.end %>
+                                </span>
+                            </p>
+                            <a href="#" class="btn btn-danger">Rückgabe</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <%- include('../partials/_footer'); %>
+
+    <script src="/javascripts/bootstrap.min.js"></script>
 </body>
 </html>
